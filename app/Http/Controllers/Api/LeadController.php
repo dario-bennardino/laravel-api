@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Lead;
+use App\Mail\NewContact;
 
 class LeadController extends Controller
 {
@@ -50,6 +52,7 @@ class LeadController extends Controller
         $new_lead->save();
 
         // invio l'email
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewContact($new_lead));
 
         //restituisco il jsoncon l'avvenuto invio
 
