@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Lead;
 
 class LeadController extends Controller
 {
@@ -44,6 +45,9 @@ class LeadController extends Controller
         };
 
         // salvo l'email nel db
+        $new_lead = new Lead();
+        $new_lead->fill($data);
+        $new_lead->save();
 
         // invio l'email
 
